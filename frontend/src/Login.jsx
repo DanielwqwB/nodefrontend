@@ -84,7 +84,7 @@ try {
   <Form.Group controlId="formUsername">  
   <Form.Label> Username: </Form.Label>  
   <Form.Control className="form-control-sm rounded-0"  
-    type="username"  
+    type="text"  
     placeholder="Enter Username"  
     value={username}  
     onChange={(e) => setUsername(e.target.value)} required />  
@@ -101,7 +101,7 @@ try {
 
 <Form.Group controlId="formButton">  
   {error && <p style={{ color: 'red' }}>{error}</p>}  
-  <Button variant="success" className="btn btn-block bg-custom btn-flat rounded-0" size="sm" block type="submit">Login</Button>  
+  <Button variant="success" className="btn btn-block bg-custom btn-flat rounded-0" size="sm" block type="submit">Login</Button> 
 </Form.Group>  
 
   </Form>  
