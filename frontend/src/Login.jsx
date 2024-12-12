@@ -15,6 +15,8 @@ import Button from 'react-bootstrap/Button';
 import { jwtDecode } from 'jwt-decode';
 
 import { API_ENDPOINT } from './Api.jsx';  
+import image from './assets/cross.png'
+import './Login.css'
 
 function Login() {  
   const navigate = useNavigate();  
@@ -60,22 +62,17 @@ try {
   };
 
   return ( <>  
-    <Navbar bg="success" data-bs-theme="dark">  
-      <Container>  
-        <Navbar.Brand href="#home">Naga College Foundation, Inc.</Navbar.Brand>  
-      </Container>  
-    </Navbar>  
+  <div className="back">
    <br /> <br /> <br /> <br /> <br /> <br />
-
    <Container>  
         <Row className="justify-content-md-center">  
           <Col md={4}>  
             <div className="login_form">  
               <div className="container">  
                 <div className="login-logo">  
-                  {/* <img src={logo} width={'38%'} alt="Logo" />   */}
+                 <center><img src={image} width={'40%'} alt="Logo" />  </center> 
                 </div>  
-                <center>MCFi: A Proposed Enrollment Systems <br /> Using Serverless Computing </center>&nbsp;
+                <center>CLINIC LOGBOOK </center>&nbsp;
                   
                 <div className="card">  
                   <div className="card-body login-card-body"> 
@@ -101,7 +98,7 @@ try {
 
 <Form.Group controlId="formButton">  
   {error && <p style={{ color: 'red' }}>{error}</p>}  
-  <Button variant="success" className="btn btn-block bg-custom btn-flat rounded-0" size="sm" block type="submit">Login</Button> 
+  <Button variant="primary" className="btn btn-block bg-custom btn-flat rounded-0" size="sm" type="submit">Login</Button> 
 </Form.Group>  
 
   </Form>  
@@ -112,6 +109,7 @@ try {
             </Col>  
               </Row>  
 </Container>
+</div>
    </>
   )
 }

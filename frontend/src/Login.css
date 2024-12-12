@@ -1,0 +1,6 @@
+.back {  
+    background-color: rgba(0, 162, 232, 1);  
+    padding: 20px 8%;  
+    height: 100vh; /* Full viewport height */  
+    background-size: cover;
+}

@@ -15,12 +15,15 @@ import  Tab  from 'react-bootstrap/Tab';
 import  Tabs from 'react-bootstrap/Tabs';
 import { FormControl, Dropdown, DropdownButton } from 'react-bootstrap';
 import { API_ENDPOINT } from './Api';  
+import './Dashboard.css'
 
 import Swal  from 'sweetalert2';
 
 import  Modal  from 'react-bootstrap/Modal';
 import  ModalBody  from 'react-bootstrap/ModalBody';
 import  ModalFooter  from 'react-bootstrap/ModalFooter';
+import image from './assets/cross.png'
+import Image from 'react-bootstrap/Image';
 
 function Dashboard() {  
 
@@ -112,47 +115,107 @@ function Dashboard() {
 }
 
   /* 3. CREATE USER */  
- const [show, setShow] = useState(false);
- const handleClose = () => setShow(false);
- const handleShow = () =>  setShow(true);
-
- const [fullName, setFullName] = useState("")
- const [username, setUsername] = useState("")
- const [password , setPassword] = useState("")
- const [validationError ,setValidationError] = useState ({})
-
-const createUser = async (e) => {
-
-  e.preventDefault();
-
-  const formData = new FormData()
-
-  formData.append('fullname', fullName)
-  formData.append('username', username)
-  formData.append('password', password)
-
-  await axios.post(`${API_ENDPOINT}/user`,{fullName, username, password},  { headers: headers }).then(({data})=>{  
-    Swal.fire({  
-      icon: "success",  
-      text: "Successfully Deleted" 
-    })
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () =>  setShow(true);
+ 
+  const [fullname, setFullname] = useState("")
+  const [username, setUsername] = useState("")
+  const [password , setPassword] = useState("")
+  const [validationError ,setValidationError] = useState ({})
+ 
+ const createUser = async (e) => {
   
-    fetchUsers();
+   e.preventDefault();
+ 
+   const formData = new FormData()
+ 
+   formData.append('fullname', fullname)
+   formData.append('username', username)
+   formData.append('password', password)
+ 
+   await axios.post(`${API_ENDPOINT}/user`,{fullname, username, password},  { headers: headers }).then(({data})=>{  
+     Swal.fire({  
+       icon: "success",  
+       text: "Successfully Created" 
+     })
+   
+     fetchUsers();
+ 
+    }).catch(({response})=>{
+     if(response.status===422){
+       setValidationError(response.data.errors)
+     }else{
+       Swal.fire({
+         text:response.data.message,
+         icon:"error"
+       })
+     }
+    })
+ } 
 
-   }).catch(({response})=>{
-    if(response.status===422){
-      setValidationError(response.data.errors)
-    }else{
-      Swal.fire({
-        text:response.data.message,
-        icon:"error"
-      })
-    }
-   })
-}
+ /* 4. updateUser */
+ 
+ const [show2, setShow2] = useState(false);  
+ const [isUpdating, setIsUpdating] = useState(false); // New state to track update mode  
+ const [currentUserId, setCurrentUserId] = useState(null); // To hold the user's ID when updating  
 
+ const handleClose2 = () => {  
+   setShow2(false);  
+   resetForm(); // Reset form on close  
+ };  
+ 
+ const handleShow2 = (user = null) => {  
+   if (user) {  
+     // If a user is passed, we're in update mode  
+     setFullname(user.fullname);  
+     setUsername(user.username);  
+     setPassword(''); // Do not prefill the password  
+     setCurrentUserId(user.user_id);  
+     setIsUpdating(true);  
+   } else {  
+     resetForm(); // Resets the form in create mode  
+     setIsUpdating(false);  
+   }  
+   setShow2(true);  
+ };  
 
-/* Read Users */
+ const resetForm = () => {  
+   setFullname("");  
+   setUsername("");  
+   setPassword("");  
+   setValidationError({});  
+   setCurrentUserId(null);  
+ };  
+
+ const updateUser = async (e) => {  
+   e.preventDefault();  
+
+   const payload = { fullname, username, password };  
+   const endpoint = `${API_ENDPOINT}/user${isUpdating ? `/${currentUserId}` : ''}`; // Update URL if in update mode  
+   const method = isUpdating ? 'put' : ''; // Use PUT for updates  
+
+   try {  
+     const response = await axios[method](endpoint,payload,{headers:headers});  
+     Swal.fire({  
+       icon: "success",  
+       text: isUpdating ? "Successfully Updated" : ""   
+     });  
+     fetchUsers(); // Fetch updated user list  
+     handleClose2(); // Close the modal  
+   } catch (error) {  
+     if (error.response && error.response.status === 422) {  
+       setValidationError(error.response.data.errors); // Handle validation errors  
+     } else {  
+       Swal.fire({  
+         text: error.response?.data?.message,  
+         icon: "error"  
+       });  
+     }  
+   }  
+ }; 
+
+ /* 5. Read Users */
 const [selectedUser, setSelectedUser] = useState(null);
 const [show1, setShow1] = useState (false);
 const handleClose1 = () => setShow1(false);
@@ -161,20 +224,19 @@ const handleShow1 = (row_users) => {
   setShow1(true);
 }
 
-
   return (  <>
-  <Navbar bg="success" data-bs-theme="dark">  
-    <Container>  
-      <Navbar.Brand href="#home">Naga College Foundation, Inc.</Navbar.Brand>  
+  <Navbar bg="primary" data-bs-theme="dark">  
+    <Container> 
+      <Navbar.Brand> <div className="logo"> <img src={image} /> CLINIC LOGBOOK </div> </Navbar.Brand>   &nbsp; &nbsp; &nbsp; &nbsp;
       <Nav className="me-auto">  
-        <Nav.Link href="#users">Users</Nav.Link>  
-        <Nav.Link href="#departments">Departments</Nav.Link>  
-        <Nav.Link href="#courses">Courses</Nav.Link>  
+        <Nav.Link href="#users">Admin</Nav.Link>   &nbsp; &nbsp; 
+        <Nav.Link href="#departments">Students</Nav.Link>    &nbsp; &nbsp;
+        <Nav.Link href="#courses">Department</Nav.Link>    &nbsp; &nbsp;
       </Nav>  
-
+ 
       <Navbar.Collapse id="basic-navbar-nav">  
         <Nav className="ms-auto">  
-          <NavDropdown title={user ? `User: ${user.username}` : 'Dropdown'} id="basic-nav-dropdown" align="end">  
+          <NavDropdown title={user ? `Hi! ${user.username}` : 'Dropdown'} id="basic-nav-dropdown" align="end">  
             <NavDropdown.Item href="#">Profile</NavDropdown.Item>  
             <NavDropdown.Item href="#">Settings</NavDropdown.Item>  
             <NavDropdown.Item href="#" onClick={handleLogout}>Logout</NavDropdown.Item>  
@@ -190,7 +252,7 @@ const handleShow1 = (row_users) => {
  <div className="container">
 
  <div className='col-12'>  
-<Button variant='btn btn-success mb-2 float-end btn-sm me-2' onClick={handleShow}>Create User</Button>  
+<Button variant='btn btn-primary mb-2 float-end btn-sm me-2' onClick={handleShow}>Create User</Button>  
 </div>
 
  <table className='table table-bordered'>  
@@ -198,7 +260,7 @@ const handleShow1 = (row_users) => {
   <tr>  
     <th style={{padding: 1, margin: 0}}>ID</th>  
     <th style={{padding: 1, margin: 0}}>Username</th>  
-    <th style={{padding: 1, margin: 0}}>Password</th>  
+    <th style={{padding: 1, margin: 0}}>Fullname</th>  
     <th style={{padding: 1, margin: 0}}>
       <center>Action</center>
       </th>  
@@ -210,13 +272,14 @@ const handleShow1 = (row_users) => {
     users.length > 0 && (  
     users.map((row_users, key) => (  
       <tr key={row_users.user_id}>  
-        <td style={{padding: 1, margin: 0}}>{row_users.user_id}</td>  
-        <td style={{padding: 1, margin: 0}}>{row_users.username}</td>  
-        <td style={{padding: 1, margin: 0}}>{row_users.fullname}</td>  
-        <td style={{padding: 1, margin: 0}}>  
+        <td style={{padding: 5, margin: 5}}>{row_users.user_id}</td>  
+        <td style={{padding: 5, margin: 5}}>{row_users.username}</td>  
+        <td style={{padding: 5, margin: 5}}>{row_users.fullname}</td>  
+        <td style={{padding: 5, margin: 5}}>  
           <center>  
-          <Button variant='secondary' size='sm' onClick={() => handleShow1(row_users)}>Read</Button>
-            <Button variant='danger' size='sm' onClick={() => deleteUser(row_users.user_id)}>Delete</Button>  
+          <Button variant='secondary' size='sm' onClick={() => handleShow1(row_users)}>Details</Button> &nbsp; &nbsp;
+          <Button variant='warning' size='sm' onClick={() => handleShow2(row_users)}>Update Users</Button> &nbsp; &nbsp;
+            <Button variant='danger' size='sm' onClick={() => deleteUser(row_users.user_id)}>Delete Users</Button>  
           </center>  
         </td>  
       </tr>  
@@ -230,7 +293,7 @@ const handleShow1 = (row_users) => {
 <Modal show={show} onHide={handleClose}>  
 
   <Modal.Header closeButton>  
-    <Modal.Title>Create User</Modal.Title>  
+    <Modal.Title>Create New Users</Modal.Title>  
   </Modal.Header>  
 
   <Modal.Body>  
@@ -240,7 +303,53 @@ const handleShow1 = (row_users) => {
         <Col>  
           <Form.Group controlId="Name">  
             <Form.Label>Fullname</Form.Label>  
-            <Form.Control type="text" value={fullName} onChange={(event)=>{setFullName(event.target.value)}} required />  
+            <Form.Control type="text" value={fullname} onChange={(event)=>{setFullname(event.target.value)}} required />  
+          </Form.Group>  
+        </Col>  
+      </Row>  
+
+      <Row>  
+        <Col>  
+          <Form.Group controlId="Username">  
+            <Form.Label>Username</Form.Label>  
+            <Form.Control type="text" value={username} onChange={(event)=>{setUsername(event.target.value)}} required />  
+          </Form.Group>  
+        </Col>  
+      </Row>  
+
+      <Row>  
+        <Col>  
+          <Form.Group controlId="Password">  
+            <Form.Label>Password</Form.Label>  
+            <Form.Control type="password" value={password} onChange={(event)=>{setPassword(event.target.value)}} required />  
+          </Form.Group>  
+        </Col>  
+      </Row>  
+
+      <Button variant="primary" className="mt-2" size="sm" type="submit">Save</Button>  
+    </Form>  
+
+  </Modal.Body>  
+
+</Modal>
+
+{/* update user*/}
+
+
+<Modal show={show2} onHide={handleClose2}>  
+
+  <Modal.Header closeButton>  
+    <Modal.Title>Update Users</Modal.Title>  
+  </Modal.Header>  
+
+  <Modal.Body>  
+
+    <Form onSubmit={updateUser}>  
+      <Row>  
+        <Col>  
+          <Form.Group controlId="Name">  
+            <Form.Label>Fullname</Form.Label>  
+            <Form.Control type="text" value={fullname} onChange={(event)=>{setFullname(event.target.value)}} required />  
           </Form.Group>  
         </Col>  
       </Row>  
