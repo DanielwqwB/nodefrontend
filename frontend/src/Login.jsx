@@ -17,6 +17,7 @@ import { jwtDecode } from 'jwt-decode';
 import { API_ENDPOINT } from './Api.jsx';  
 import image from './assets/cross.png'
 import './Login.css'
+import netflix_spinner from './assets/Spinner@1x-0.5s-200px-200px.gif'
 
 function Login() {  
   const navigate = useNavigate();  
@@ -41,11 +42,13 @@ function Login() {
   /* Performs Login Method */  
   const [username, setUsername] = useState('');  
   const [password, setPassword] = useState('');  
-  const [error, setError] = useState('');  
+  const [error, setError] = useState(''); 
+  const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async (e) => {  
     e.preventDefault();  
 
+    setLoading(true);
 try {  
     const response = await axios.post(`${API_ENDPOINT}/auth/login`, {  
       username,  
@@ -59,9 +62,13 @@ try {
   } catch (error) {  
     setError('Invalid username or password');  
     }  
+    setLoading(false);
   };
 
-  return ( <>  
+  return ( 
+    loading?<div className="login-spinner">
+      <img src={netflix_spinner} alt="" />
+    </div>:
   <div className="back">
    <br /> <br /> <br /> <br /> <br /> <br />
    <Container>  
@@ -110,7 +117,6 @@ try {
               </Row>  
 </Container>
 </div>
-   </>
   )
 }
                     

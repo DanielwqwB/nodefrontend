@@ -237,7 +237,7 @@ const handleShow1 = (row_users) => {
       <Navbar.Collapse id="basic-navbar-nav">  
         <Nav className="ms-auto">  
           <NavDropdown title={user ? `Hi! ${user.username}` : 'Dropdown'} id="basic-nav-dropdown" align="end">  
-            <NavDropdown.Item href="#">Profile</NavDropdown.Item>  
+            <NavDropdown.Item href="#" >Profile</NavDropdown.Item>  
             <NavDropdown.Item href="#">Settings</NavDropdown.Item>  
             <NavDropdown.Item href="#" onClick={handleLogout}>Logout</NavDropdown.Item>  
           </NavDropdown>  
@@ -252,7 +252,7 @@ const handleShow1 = (row_users) => {
  <div className="container">
 
  <div className='col-12'>  
-<Button variant='btn btn-primary mb-2 float-end btn-sm me-2' onClick={handleShow}>Create User</Button>  
+<Button variant='btn btn-primary mb-2 float-end btn-sm me-2' style={{padding: 5, margin: 5}} onClick={handleShow}>Create User</Button>  
 </div>
 
  <table className='table table-bordered'>  
@@ -278,8 +278,8 @@ const handleShow1 = (row_users) => {
         <td style={{padding: 5, margin: 5}}>  
           <center>  
           <Button variant='secondary' size='sm' onClick={() => handleShow1(row_users)}>Details</Button> &nbsp; &nbsp;
-          <Button variant='warning' size='sm' onClick={() => handleShow2(row_users)}>Update Users</Button> &nbsp; &nbsp;
-            <Button variant='danger' size='sm' onClick={() => deleteUser(row_users.user_id)}>Delete Users</Button>  
+          <Button variant='warning' size='sm' onClick={() => handleShow2(row_users)}>Update </Button> &nbsp; &nbsp;
+            <Button variant='danger' size='sm' onClick={() => deleteUser(row_users.user_id)}>Delete </Button>  
           </center>  
         </td>  
       </tr>  
@@ -349,7 +349,7 @@ const handleShow1 = (row_users) => {
         <Col>  
           <Form.Group controlId="Name">  
             <Form.Label>Fullname</Form.Label>  
-            <Form.Control type="text" value={fullname} onChange={(event)=>{setFullname(event.target.value)}} required />  
+            <Form.Control type="text" value={fullname} onChange={(event)=>{setFullname(event.target.value)}} />  
           </Form.Group>  
         </Col>  
       </Row>  
@@ -358,7 +358,7 @@ const handleShow1 = (row_users) => {
         <Col>  
           <Form.Group controlId="Username">  
             <Form.Label>Username</Form.Label>  
-            <Form.Control type="text" value={username} onChange={(event)=>{setUsername(event.target.value)}} required />  
+            <Form.Control type="text" value={username} onChange={(event)=>{setUsername(event.target.value)}} />  
           </Form.Group>  
         </Col>  
       </Row>  
@@ -367,7 +367,7 @@ const handleShow1 = (row_users) => {
         <Col>  
           <Form.Group controlId="Password">  
             <Form.Label>Password</Form.Label>  
-            <Form.Control type="password" value={password} onChange={(event)=>{setPassword(event.target.value)}} required />  
+            <Form.Control type="password" value={password} onChange={(event)=>{setPassword(event.target.value)}} />  
           </Form.Group>  
         </Col>  
       </Row>  
