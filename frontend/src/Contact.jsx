@@ -172,7 +172,7 @@ function Contact() {
                                 value={message}  
                                 onChange={(e) => setMessage(e.target.value)}  
                                 required  
-                                style={{ ...styles.input, height: '100px' }}  
+                                style={{ ...styles.input, height: '100px', width: '500px'}}  
                             />  
                         </div>  
                         <button type="submit" style={styles.button}>Submit</button>  
