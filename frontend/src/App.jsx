@@ -19,7 +19,9 @@ import { jwtDecode } from 'jwt-decode';
 import Form from 'react-bootstrap/Form';  
 
 import Dashboard from './Dashboard';  
-import Login from './Login';  
+import Login from './Login'; 
+import HospitalReservation from './HospitalReservation'
+import Contact from './Contact';
 
 function App() {  
   return (  
@@ -30,6 +32,8 @@ function App() {
             <Route path="/" element={<Login />} />  
             <Route path="/login" element={<Login />} />  
             <Route path="/dashboard" element={<Dashboard />} />  
+            <Route  path="/HospitalReservation" element={<HospitalReservation />} />
+            <Route path='/Contact' element={<Contact/>} />
           </Routes>  
         </Col>  
       </Row>  

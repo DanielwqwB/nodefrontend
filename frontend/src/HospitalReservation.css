@@ -1,0 +1,190 @@
+/* General Styles */
+.container-services {  
+  padding: 30px;  
+  background-color: #f9f9f9; /* Lighter background for a softer feel */  
+  text-align: center;  
+  border-radius: 15px;  
+  margin: 40px auto; /* Centers container */  
+  max-width: 800px; /* Limits width for better readability */  
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Soft shadow */  
+  font-family: 'Open Sans', sans-serif; /* Modern font */  
+  border: 1px solid #ddd; /* Soft border for separation */  
+}  
+
+.container-services1 h1 {  
+  font-size: 36px; /* Increased font size for emphasis */  
+  color: #2c3e50; /* Softer dark color */  
+  margin: 20px 0;  
+  font-weight: 700;  
+  font-family: 'Poppins', sans-serif; /* Consistent font */  
+  text-transform: uppercase;  
+  letter-spacing: 2px;  
+  text-align: center;  
+}  
+
+input, select {  
+  width: 90%; /* Responsive width */  
+  padding: 10px; /* Padding for inputs */  
+  margin: 10px 0; /* Margin between inputs */  
+  border: 1px solid #ccc; /* Soft border for inputs */  
+  border-radius: 5px; /* Rounded corners for inputs */  
+  font-size: 16px; /* Increased font size for readability */  
+}  
+button {  
+  padding: 10px 20px; /* Padding for button */  
+  background-color: #007BFF; /* Primary color for button */  
+  color: white; /* White text for contrast */  
+  border: none; /* No border */  
+  border-radius: 5px; /* Rounded corners */  
+  font-size: 18px; /* Increased font size */  
+  cursor: pointer; /* Pointer cursor on hover */  
+  margin-top: 10px; /* Space above button */  
+}  
+
+button:hover {  
+  background-color: #0056b3; /* Darker shade on hover */  
+}  
+.services-form {
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.services-form label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 600;
+}
+
+.services-form input {
+  padding: 15px;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.services-form input:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.services-form button {
+  padding: 12px 25px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.services-form button:hover {
+  background-color: #003d7a;
+}
+
+.services-form button:active {
+  background-color: #002a52;
+}
+
+/* Flight Deals Section - Horizontal Layout */
+.deals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+/* Services Section */
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.service-card {
+  width: calc(33% - 30px);
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-card h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+
+.service-card p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.service-card button {
+  padding: 12px 25px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.service-card button:hover {
+  background-color: #003d7a;
+}
+
+/* Navbar Styles */
+
+
+.title {
+  font-size: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  left: 360px;
+  bottom: -35px;
+  font-weight: 700;
+  color: #003366;
+  letter-spacing: 1px;
+}
+
+.title-1 {
+  font-size: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  left: 430px;
+  bottom: -20px;
+  font-weight: 700;
+  color: #003366;
+  letter-spacing: 1px;
+}

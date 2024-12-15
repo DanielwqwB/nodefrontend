@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';  
-import { data, useNavigate } from 'react-router-dom';  
+import { data, useNavigate, Link } from 'react-router-dom';  
 import axios from 'axios';  
 
 import Container from 'react-bootstrap/Container';  
@@ -229,9 +229,9 @@ const handleShow1 = (row_users) => {
     <Container> 
       <Navbar.Brand> <div className="logo"> <img src={image} /> CLINIC LOGBOOK </div> </Navbar.Brand>   &nbsp; &nbsp; &nbsp; &nbsp;
       <Nav className="me-auto">  
-        <Nav.Link href="#users">Admin</Nav.Link>   &nbsp; &nbsp; 
-        <Nav.Link href="#departments">Students</Nav.Link>    &nbsp; &nbsp;
-        <Nav.Link href="#courses">Department</Nav.Link>    &nbsp; &nbsp;
+        <Nav.Link href='#'>Dashoard</Nav.Link>   &nbsp; &nbsp; 
+        <Nav.Link as={Link} to="/HospitalReservation">Booking</Nav.Link>    &nbsp; &nbsp;
+        <Nav.Link as={Link} to="/Contact">Contact</Nav.Link>    &nbsp; &nbsp;
       </Nav>  
  
       <Navbar.Collapse id="basic-navbar-nav">  
